@@ -1,7 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Hoshanot.Web.DataAccess.DataSource;
+@using Hoshanot.Web.DataAccess.Models;
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Hoshanot</title>
@@ -26,8 +28,25 @@
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Registrieren", "Register", "User")</li>
-                    <li>@Html.ActionLink("Anmelden", "Login", "User")</li>
+                    @{
+                        string SessionID;
+                        try
+                        {
+                            SessionID= Request.Cookies["sessionID"].Value.ToString();
+                            <li>@Html.ActionLink("Warenkorb", "ShoppingCart", "Users")</li>
+                            <li>@Html.ActionLink("Dein Account", "Account", "Users")</li>
+                            <li>@Html.ActionLink("Abmelden", "Logout", "Users")</li>
+                        }
+                        catch (Exception e)
+                        {
+
+                            <li>@Html.ActionLink("Warenkorb", "ShoppingCart", "Users")</li>
+                            <li>@Html.ActionLink("Registrieren", "Register", "Users")</li>
+                            <li>@Html.ActionLink("Anmelden", "Login", "Users")</li>
+                        }
+
+                    }
+
                 </ul>
             </div>
         </div>

@@ -33,26 +33,9 @@
         <dd>
             @Html.DisplayFor(model => model.TelNr)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SessionID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SessionID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsAdmin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsAdmin)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Details Ändern","Edit")
+    @Html.ActionLink("Bestellungen", "Orders")
 </p>

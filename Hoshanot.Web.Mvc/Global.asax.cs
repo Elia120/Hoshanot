@@ -1,3 +1,4 @@
+using Hoshanot.Web.DataAccess.DataSource;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,9 @@ namespace Hoshanot.Web.Mvc
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //System.Data.Entity.Database.SetInitializer(new HoshanotInitializer());
+            //HoshanotContext db = new HoshanotContext();
+            //db.Database.Initialize(true);
         }
     }
 }
