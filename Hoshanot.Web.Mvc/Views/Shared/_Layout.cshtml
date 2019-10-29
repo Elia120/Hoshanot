@@ -11,7 +11,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top ">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -23,30 +23,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Startseite", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Informationen", "About", "Home")</li>
+                    <li>@Html.ActionLink("Produkte", "Products", "Home")</li>
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    @{
-                        string SessionID;
-                        try
-                        {
-                            SessionID= Request.Cookies["sessionID"].Value.ToString();
-                            <li>@Html.ActionLink("Warenkorb", "ShoppingCart", "Users")</li>
-                            <li>@Html.ActionLink("Dein Account", "Account", "Users")</li>
-                            <li>@Html.ActionLink("Abmelden", "Logout", "Users")</li>
-                        }
-                        catch (Exception e)
-                        {
-
-                            <li>@Html.ActionLink("Warenkorb", "ShoppingCart", "Users")</li>
-                            <li>@Html.ActionLink("Registrieren", "Register", "Users")</li>
-                            <li>@Html.ActionLink("Anmelden", "Login", "Users")</li>
-                        }
-
-                    }
-
+                            <li>@Html.ActionLink("Warenkorb", "ShoppingCart", "Home")</li>
                 </ul>
             </div>
         </div>

@@ -1,0 +1,110 @@
+﻿@model IEnumerable<Hoshanot.Web.DataAccess.Models.Product>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<h2>Produkte</h2>
+@{
+    <section class="pricing-table3 cid-rEzNmfFkYG" id="pricing-tables3-5">
+        <div class="container">
+            <div class="media-container-row">
+                <div class="row">
+                    @{int i = 0; }
+                    @foreach (var item in Model)
+                    {
+                        <div class=" col-12 col-lg-4 col-md-6 my-2">
+                            <div class="pricing" style="border:2px solid lightgrey; border-radius: 20px;margin:20px; padding:10px;">
+                                <div class="plan-header">
+                                    <div class="plan-price">
+                                        <h3 class="plan-title mbr-fonts-style display-5">
+                                            <p>
+                                                @Html.DisplayFor(modelItem => item.Name)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CHF &nbsp; @Html.DisplayFor(modelItem => item.Price)
+                                            </p>
+                                        </h3>
+                                        <h4>
+                                                @Html.DisplayFor(modelItem => item.Description)
+                                          </h4> 
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="plan-body">
+                                    <ul class="pagination" style="margin:0px;">
+                                        <li class="page-item">
+                                            <a class="page-link linkback" href="#">«</a>
+                                        </li>
+                                        <li class="page-item active">
+                                            <a class="page-link linkvalue" href="#">1</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link linknext" href="#">»</a>
+                                        </li>
+                                        <li class="">
+                                            <a href="#" value="@i" class="btn btn-primary display-4 înshoppingbasket" style="margin-left: 60px;">In Warenkorb:</a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        i++;
+                    }
+                </div>
+
+            </div>
+        </div>
+        <div style="margin:30px;">
+            @Html.ActionLink("Zum Warenkorb", "ShoppingCart", "Home", null, new { @class = "btn btn-primary btn-lg float-right pull-right", @style = "all" })
+        </div>
+    </section>
+    
+
+@Scripts.Render("~/bundles/jquery");
+<script>
+    $(document).ready(function () {
+        $(".elementsProduct").hover(
+            function () {
+                $(this).css("background-color", "#f1f1f1");
+                $(this).css("border", "3px solid #a29c9c");
+            }, function () {
+                $(this).css({ 'background-color': '', 'opacity': '' });
+                $(this).css("border", "2px solid lightgrey");
+            }
+        );
+        $(".linkback").click(function () {
+            var a = $(this).parent().next().children().text();
+            if (a > 1) {
+                $(this).parent().next().children().text(a - 1);
+            }
+        });
+        $(".linknext").click(function () {
+
+            var a = $(this).parent().prev().children().text();
+
+
+            $(this).parent().prev().children().text(a - 1 + 2);
+
+        });
+        $(".înshoppingbasket").click(function () {
+
+            var index = $(this).attr("value");
+            var a = $(this).parent().prev().prev().children().text();
+
+            var data = {
+                index: index,
+                value: a
+            }
+            $.post("ProductsCookies", data, function () {
+
+            })
+        });
+    });
+
+</script>
+
+}
+
+

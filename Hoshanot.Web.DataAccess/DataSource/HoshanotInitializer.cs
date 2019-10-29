@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hoshanot.Web.DataAccess.DataSource
 {
-    public class HoshanotInitializer : DropCreateDatabaseAlways<HoshanotContext>
+    public class HoshanotInitializer : DropCreateDatabaseIfModelChanges<HoshanotContext>
     {
         protected override void Seed(HoshanotContext context)
         {
@@ -19,6 +19,27 @@ namespace Hoshanot.Web.DataAccess.DataSource
                 IsAdmin=true,
                 TelNr="0041794011368"
                 
+            });
+            context.Products.Add(new Product
+            {
+                Name = "Aroves",
+                Description = "2 Stück",
+                Price = 2,
+                PictureLink = @"C:\Photos\Gumiringe"
+            });
+            context.Products.Add(new Product
+            {
+                Name= "Hoshanot",
+                Description= "Hoshanot mit Gummi gebunden",
+                Price = 5,
+                PictureLink = @"C:\Photos\Gumiringe"
+            });
+            context.Products.Add(new Product
+            {
+                Name = "Hoshanot",
+                Description = "Hoshanot mit Lulav-Blatt gebunden",
+                Price =6,
+                PictureLink= @"C:\Photos\lulavring"
             });
             context.SaveChanges();
         }

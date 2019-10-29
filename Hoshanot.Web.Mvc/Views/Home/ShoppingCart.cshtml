@@ -1,0 +1,102 @@
+﻿
+@model List<Hoshanot.Web.DataAccess.Models.Product>
+
+@{
+    ViewBag.Title = "Warenkorb";
+}
+<h2>Warenkorb</h2>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Beschrebung
+        </th>
+        <th>
+            Preis
+        </th>
+        <th>
+            Stückzahl
+        </th>
+        <th></th>
+    </tr>
+    @{decimal Total = 0; }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.ActionLink("Entfernen", "RemoveProductsCookies", new { index = (item.ProductID - 1) })
+            </td>
+        </tr>
+        Total += item.Price * item.Amount;
+    }
+
+    <tr>
+        <th>
+            Total:
+        </th>
+        <th>@Total</th>
+        <th>
+        </th>
+        <th>
+        </th>
+        <th>
+            @Html.ActionLink("Zur Kasse", "Checkout", "Users", null, new { @class = "btn btn-primary btn-lg float-right pull-right ", @style = "all" })
+        </th>
+    </tr>
+</table>
+@Scripts.Render("~/bundles/jquery");
+<script>
+    $(document).ready(function () {
+        $(".elementsProduct").hover(
+            function () {
+                $(this).css("background-color", "#f1f1f1");
+                $(this).css("border", "3px solid #a29c9c");
+            }, function () {
+                $(this).css({ 'background-color': '', 'opacity': '' });
+                $(this).css("border", "2px solid lightgrey");
+            }
+        );
+        $(".linkback").click(function () {
+            var a = $(this).parent().next().children().text();
+            if (a > 1) {
+                $(this).parent().next().children().text(a - 1);
+            }
+        });
+        $(".linknext").click(function () {
+
+            var a = $(this).parent().prev().children().text();
+
+
+            $(this).parent().prev().children().text(a - 1 + 2);
+
+        });
+        $(".înshoppingbasket").click(function () {
+
+            var index = $(this).attr("value");
+            var a = $(this).parent().prev().prev().children().text();
+
+            var data = {
+                index: index,
+                value: a
+            }
+            $.post("ProductsCookies", data, function () {
+
+            })
+        });
+    });
+
+</script>

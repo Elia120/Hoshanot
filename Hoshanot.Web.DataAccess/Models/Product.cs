@@ -12,5 +12,7 @@ namespace Hoshanot.Web.DataAccess.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
+        public string PictureLink { get; set; }
+        public int Amount { get; set; }
     }
 }

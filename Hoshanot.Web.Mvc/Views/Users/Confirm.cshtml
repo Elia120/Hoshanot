@@ -1,0 +1,135 @@
+﻿@model List<Hoshanot.Web.DataAccess.Models.Product>
+@{
+    ViewBag.Title = "Bestätigen";
+}
+
+<h2>Bestätigen</h2>
+<hr>
+<div class="form-horizontal">
+    <div class="form-group">
+        <label class="control-label col-md-2" for="FistName">Vorname</label>
+        <div class="col-md-10">
+            <p class="form-control text-box single-line" style="max-width: 280px">@ViewBag.Data.LastName</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="LastName">Nachname</label>
+        <div class="col-md-10">
+            <p class="form-control text-box single-line" style="max-width: 280px">@ViewBag.Data.FistName</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="TelNr">Telefonnummer</label>
+        <div class="col-md-10">
+            <p class="form-control text-box single-line" style="max-width: 280px">@ViewBag.Data.TelNr</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Email">E-Mail</label>
+        <div class="col-md-10">
+            <p class="form-control text-box single-line" style="max-width: 280px">@ViewBag.Data.Email</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <label class="control-label col-md-2" for="Lieferunsart">Lieferunsart</label>
+        <div class="col-md-10 dropdownLieferung">
+            <p class="form-control text-box single-line" style="max-width: 280px">@ViewBag.Data.DeliverTyp</p>
+        </div>
+    </div>
+    @if (ViewBag.Data.DeliverTyp == Hoshanot.Web.Mvc.ViewModels.DeliverTyp.Home)
+    {
+        <div class="form-group heim" style="display: none;">
+            <label class="control-label col-md-2" for="Strasse">Strasse</label>
+            <div class="col-md-10">
+                <p class="form-control text-box single-line" style="max-width: 280px">@ViewBag.Data.Strasse</p>
+            </div>
+        </div>
+
+        <div class="form-group heim" style="display: none;">
+            <label class="control-label col-md-2" for="Hausnummer">Hausnummer</label>
+            <div class="col-md-10">
+                <p class="form-control text-box single-line" style="max-width: 280px">@ViewBag.Data.Hausnummer</p>
+            </div>
+        </div>
+    }
+  
+
+
+
+
+
+</div>
+
+
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Beschrebung
+            </th>
+            <th>
+                Preis
+            </th>
+            <th>
+                Stückzahl
+            </th>
+        </tr>
+        @{decimal Total = 0; }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+            </tr>
+            Total += item.Price * item.Amount;
+        }
+        @if (ViewBag.Data.DeliverTyp == Hoshanot.Web.Mvc.ViewModels.DeliverTyp.Home)
+        {
+            <tr>
+                <td>
+                    Heimlieferung
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    10.00
+                </td>
+                <td>
+                   1
+                </td>
+            </tr>
+            Total += 10;
+        }
+
+        <tr>
+            <th>
+                Total:
+            </th>
+            <th>@Total</th>
+            <th>
+            </th>
+            <th>
+                @Html.ActionLink("Bestätigen", "Confirmed", "Users", new {id=ViewBag.Data.OrderID}, new { @class = "btn btn-primary btn-lg float-right pull-right ", @style = "all" })
+            </th>
+
+        </tr>
+    </table>
